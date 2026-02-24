@@ -1,4 +1,4 @@
-# 📦 RapidPack – System Wyceny Przesyłek
+## 📦 RapidPack – System Wyceny Przesyłek
 
 Witajcie w zespole deweloperskim! 👋
 Waszym zadaniem jest stworzenie aplikacji desktopowej dla lokalnej firmy kurierskiej **RapidPack**. Klient ma dość liczenia cen na kartce i potrzebuje niezawodnego narzędzia dla swoich pracowników.
