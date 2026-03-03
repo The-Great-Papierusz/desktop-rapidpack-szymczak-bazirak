@@ -7,7 +7,8 @@
         Title="RapidPack">
         <StackPanel>
                 <StackPanel x:Name="StackPanel1" Margin="10" Spacing="10">
-                        
+                        <TextBlock Name="AppTitle" Text="RapidPack" FontSize="20" FontWeight="Bold" />
+                        <TextBlock Name="Authors" Text="Twórcy: Mikołaj B. i Dominika S." Foreground="Gray"/>
                 </StackPanel>
                 
                 <StackPanel x:Name="StackPanel2" Margin="20" Spacing="10">
