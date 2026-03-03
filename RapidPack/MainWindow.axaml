@@ -5,5 +5,22 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="RapidPack.MainWindow"
         Title="RapidPack">
-    Welcome to Avalonia!
+        <StackPanel>
+                <StackPanel x:Name="StackPanel1" Margin="10" Spacing="10">
+                        
+                </StackPanel>
+                
+                <StackPanel x:Name="StackPanel2" Margin="20" Spacing="10">
+                       
+                </StackPanel>
+                <StackPanel x:Name="StackPanel3" Margin="20" Spacing="10">
+                       
+                </StackPanel>
+                <StackPanel x:Name="StackPanel4" Margin="20" Spacing="10">
+                       
+                </StackPanel>
+                <StackPanel x:Name="StackPanel5" Margin="20" Spacing="10">
+                        
+                </StackPanel>
+        </StackPanel>
 </Window>
