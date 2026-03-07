@@ -7,20 +7,35 @@
         Title="RapidPack">
         <StackPanel>
                 <StackPanel x:Name="StackPanel1" Margin="10" Spacing="10">
-                        
+                        <TextBlock Name="AppTitle" Text="RapidPack" FontSize="20" FontWeight="Bold" />
+                        <TextBlock Name="Authors" Text="Twórcy: Mikołaj B. i Dominika S." Foreground="Gray"/>
                 </StackPanel>
                 
                 <StackPanel x:Name="StackPanel2" Margin="20" Spacing="10">
-                       
+                        <TextBox x:Name="HeightInputBox" Watermark="Podaj wysokość (cm):"/> 
+                        <TextBox x:Name="WidthInputBox" Watermark="Podaj szerokość (cm):"/> 
+                        <TextBox x:Name="DepthInputBox" Watermark="Podaj głębokośc (cm):"/>  
+                        <TextBox x:Name="WeightInputBox" Watermark="Podaj wagę (kg):"/>
+
                 </StackPanel>
                 <StackPanel x:Name="StackPanel3" Margin="20" Spacing="10">
-                       
+                        <CheckBox x:Name="ExpressCheckBox" Content="Usługa Ekspres (+15zł)" />
+                        <ComboBox x:Name="ServiceComboBox" Margin="0,10,0,0" PlaceholderText="Wybierz typ usługi: ">
+                                <ComboBoxItem Content="Standardowa (+0zł)" />
+                                <ComboBoxItem Content="Ostrożnie (+10zł)" />
+                                <ComboBoxItem Content="Paleta" />
+                        </ComboBox>
                 </StackPanel>
                 <StackPanel x:Name="StackPanel4" Margin="20" Spacing="10">
-                       
+                        <Button x:Name="CalculatePriceButton" Content="WYCEŃ" /> 
                 </StackPanel>
-                <StackPanel x:Name="StackPanel5" Margin="20" Spacing="10">
-                        
+                <StackPanel x:Name="StackPanel5" Margin="20" Spacing="10" IsVisible="False">
+                        <TextBlock x:Name="FeedbackText" Text="Dziękujemy za Pańską Przesyłkę!"/>
+                        <TextBlock x:Name="Size" Text=""/>
+                        <TextBlock x:Name="Weight" Text=""/>
+                        <TextBlock x:Name="Express" Text=""/>
+                        <TextBlock x:Name="ServiceType" Text=""/>
+                        <TextBlock x:Name="TotalPrice" FontWeight="Bold" Text=""/>
                 </StackPanel>
         </StackPanel>
 </Window>
