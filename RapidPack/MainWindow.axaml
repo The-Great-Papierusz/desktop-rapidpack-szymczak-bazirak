@@ -29,8 +29,13 @@
                 <StackPanel x:Name="StackPanel4" Margin="20" Spacing="10">
                         <Button x:Name="CalculatePriceButton" Content="WYCEŃ" /> 
                 </StackPanel>
-                <StackPanel x:Name="StackPanel5" Margin="20" Spacing="10">
-                        
+                <StackPanel x:Name="StackPanel5" Margin="20" Spacing="10" IsVisible="False">
+                        <TextBlock x:Name="FeedbackText" Text="Dziękujemy za Pańską Przesyłkę!"/>
+                        <TextBlock x:Name="Size" Text=""/>
+                        <TextBlock x:Name="Weight" Text=""/>
+                        <TextBlock x:Name="Express" Text=""/>
+                        <TextBlock x:Name="ServiceType" Text=""/>
+                        <TextBlock x:Name="TotalPrice" FontWeight="Bold" Text=""/>
                 </StackPanel>
         </StackPanel>
 </Window>
