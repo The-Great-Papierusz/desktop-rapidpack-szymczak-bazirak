@@ -19,7 +19,12 @@
 
                 </StackPanel>
                 <StackPanel x:Name="StackPanel3" Margin="20" Spacing="10">
-                       
+                        <CheckBox x:Name="ExpressCheckBox" Content="Usługa Ekspres (+15zł)" />
+                        <ComboBox x:Name="ServiceComboBox" Margin="0,10,0,0" PlaceholderText="Wybierz typ usługi: ">
+                                <ComboBoxItem Content="Standardowa (+0zł)" />
+                                <ComboBoxItem Content="Ostrożnie (+10zł)" />
+                                <ComboBoxItem Content="Paleta" />
+                        </ComboBox>
                 </StackPanel>
                 <StackPanel x:Name="StackPanel4" Margin="20" Spacing="10">
                        
