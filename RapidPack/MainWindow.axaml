@@ -12,7 +12,11 @@
                 </StackPanel>
                 
                 <StackPanel x:Name="StackPanel2" Margin="20" Spacing="10">
-                       
+                        <TextBox x:Name="HeightInputBox" Watermark="Podaj wysokość (cm):"/> 
+                        <TextBox x:Name="WidthInputBox" Watermark="Podaj szerokość (cm):"/> 
+                        <TextBox x:Name="DepthInputBox" Watermark="Podaj głębokośc (cm):"/>  
+                        <TextBox x:Name="WeightInputBox" Watermark="Podaj wagę (kg):"/>
+
                 </StackPanel>
                 <StackPanel x:Name="StackPanel3" Margin="20" Spacing="10">
                        
