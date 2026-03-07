@@ -27,7 +27,7 @@
                         </ComboBox>
                 </StackPanel>
                 <StackPanel x:Name="StackPanel4" Margin="20" Spacing="10">
-                       
+                        <Button x:Name="CalculatePriceButton" Content="WYCEŃ" /> 
                 </StackPanel>
                 <StackPanel x:Name="StackPanel5" Margin="20" Spacing="10">
                         
