@@ -21,6 +21,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        CalculatePriceButton.IsEnabled = false;
         HeightInputBox.TextChanged += FormChange;
         WidthInputBox.TextChanged += FormChange;
         DepthInputBox.TextChanged += FormChange;
@@ -52,7 +53,31 @@ public partial class MainWindow : Window
     {
         try
         {
+            double finalPrice = 10;
+            if (ServiceOption == "Paleta")
+            {
+                finalPrice = 100;
+            }
+            else
+            {
+                finalPrice += (2 * WeightInt);
+                if (ServiceOption == "Ostrożnie (+10zł)")
+                {
+                    finalPrice += 10;
+                }
 
+                if (ExpressOption == "Checked")
+                {
+                    finalPrice += 15;
+                }
+
+                if (HeightInt * WidthInt * DepthInt > 150)
+                {
+                    finalPrice *= 1.5;
+                }
+                
+                
+            }
         }
         catch (Exception exception)
         {
@@ -74,6 +99,11 @@ public partial class MainWindow : Window
             CalculatePriceButton.Content = "WAGA NIE MOŻE BYĆ WIĘKSZA OD 30KG";
             
         }
+        else if (!heightConv || !widthConv || !depthConv || !weightConv)
+        {
+            CalculatePriceButton.IsEnabled = false;
+            CalculatePriceButton.Content = "PROSZE WPROWADZIĆ POPRAWNE WARTOŚCI";
+        }
         else
         {
             CalculatePriceButton.IsEnabled = true;
@@ -81,14 +111,7 @@ public partial class MainWindow : Window
             CalculatePriceButton.Content = "WYCEŃ";
         }
 
-        if (!heightConv || !widthConv || !depthConv)
-        {
-            CalculatePriceButton.IsEnabled = false;
-            CalculatePriceButton.Content = "PROSZE WPROWADZIĆ POPRAWNĄ WARTOŚĆ";
-        }
-        else
-        {
-            CalculatePriceButton.IsEnabled = true;
-        }
+        
+        
     }
 }
