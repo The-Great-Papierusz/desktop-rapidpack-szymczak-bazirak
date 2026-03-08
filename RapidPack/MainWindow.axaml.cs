@@ -28,17 +28,17 @@ public partial class MainWindow : Window
         
         CalculatePriceButton.Click += CalculatePriceButton_Click;
         
-        HeightStr = this.FindControl<TextBox>("HeightInputBox");
-        var HeightConv = int.TryParse(HeightStr.Text,out HeightInt);
+        HeightStr = this.FindControl<TextBox>("HeightInputBox")!;
+        var heightConv = int.TryParse(HeightStr.Text,out HeightInt);
         
-        WidthStr = this.FindControl<TextBox>("WidthInputBox");
-        var WidthConv = int.TryParse(WidthStr.Text,out WidthInt);
+        WidthStr = this.FindControl<TextBox>("WidthInputBox")!;
+        var widthConv = int.TryParse(WidthStr.Text,out WidthInt);
         
-        DepthStr = this.FindControl<TextBox>("DepthInputBox");
-        var DepthConv = int.TryParse(DepthStr.Text,out DepthInt);
+        DepthStr = this.FindControl<TextBox>("DepthInputBox")!;
+        var depthConv = int.TryParse(DepthStr.Text,out DepthInt);
         
-        WeightStr = this.FindControl<TextBox>("WeightInputBox");
-        var WeightConv = int.TryParse(WeightStr.Text,out WeightInt);
+        WeightStr = this.FindControl<TextBox>("WeightInputBox")!;
+        var weightConv = int.TryParse(WeightStr.Text,out WeightInt);
         
         ExpressOption = ExpressCheckBox.IsChecked == true ? "Checked" : "Unchecked";
         
@@ -48,7 +48,7 @@ public partial class MainWindow : Window
         
     }
 
-    private void CalculatePriceButton_Click(object sender, RoutedEventArgs e)
+    private void CalculatePriceButton_Click(object? sender, RoutedEventArgs e)
     {
         try
         {
@@ -61,12 +61,34 @@ public partial class MainWindow : Window
         }
     }
 
-    private void FormChange(object sender, RoutedEventArgs e)
+    private void FormChange(object? sender, TextChangedEventArgs textChangedEventArgs)
     {
-        var HeightConv = int.TryParse(HeightStr.Text,out HeightInt);
-        var WidthConv = int.TryParse(WidthStr.Text,out WidthInt);
-        var DepthConv = int.TryParse(DepthStr.Text,out DepthInt);
-        var WeightConv = int.TryParse(WeightStr.Text,out WeightInt);
-        
+        var heightConv = int.TryParse(HeightStr.Text,out HeightInt);
+        var widthConv = int.TryParse(WidthStr.Text,out WidthInt);
+        var depthConv = int.TryParse(DepthStr.Text,out DepthInt);
+        var weightConv = int.TryParse(WeightStr.Text,out WeightInt);
+        if (WeightInt > 30 || !weightConv)
+        {
+            CalculatePriceButton.IsEnabled = false;
+            CalculatePriceButton.Background = Brushes.DarkRed;
+            CalculatePriceButton.Content = "WAGA NIE MOŻE BYĆ WIĘKSZA OD 30KG";
+            
+        }
+        else
+        {
+            CalculatePriceButton.IsEnabled = true;
+            CalculatePriceButton.Background = Brushes.Green;
+            CalculatePriceButton.Content = "WYCEŃ";
+        }
+
+        if (!heightConv || !widthConv || !depthConv)
+        {
+            CalculatePriceButton.IsEnabled = false;
+            CalculatePriceButton.Content = "PROSZE WPROWADZIĆ POPRAWNĄ WARTOŚĆ";
+        }
+        else
+        {
+            CalculatePriceButton.IsEnabled = true;
+        }
     }
 }
