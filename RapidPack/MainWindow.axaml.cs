@@ -7,10 +7,10 @@ namespace RapidPack;
 
 public partial class MainWindow : Window
 {
-    public TextBox HeightStr;
-    public TextBox WidthStr;
-    public TextBox DepthStr;
-    public TextBox WeightStr;
+    private readonly TextBox _heightStr;
+    private readonly TextBox _widthStr;
+    private readonly TextBox _depthStr;
+    private readonly TextBox _weightStr;
     public string ExpressOption;
     public string ServiceOption;
 
@@ -26,20 +26,22 @@ public partial class MainWindow : Window
         WidthInputBox.TextChanged += FormChange;
         DepthInputBox.TextChanged += FormChange;
         WeightInputBox.TextChanged += FormChange;
+        ExpressCheckBox.IsCheckedChanged += FormChange;
+        ServiceComboBox.SelectionChanged += FormChange;
         
         CalculatePriceButton.Click += CalculatePriceButton_Click;
         
-        HeightStr = this.FindControl<TextBox>("HeightInputBox")!;
-        var heightConv = int.TryParse(HeightStr.Text,out HeightInt);
+        _heightStr = this.FindControl<TextBox>("HeightInputBox")!;
+        var heightConv = int.TryParse(_heightStr.Text,out HeightInt);
         
-        WidthStr = this.FindControl<TextBox>("WidthInputBox")!;
-        var widthConv = int.TryParse(WidthStr.Text,out WidthInt);
+        _widthStr = this.FindControl<TextBox>("WidthInputBox")!;
+        var widthConv = int.TryParse(_widthStr.Text,out WidthInt);
         
-        DepthStr = this.FindControl<TextBox>("DepthInputBox")!;
-        var depthConv = int.TryParse(DepthStr.Text,out DepthInt);
+        _depthStr = this.FindControl<TextBox>("DepthInputBox")!;
+        var depthConv = int.TryParse(_depthStr.Text,out DepthInt);
         
-        WeightStr = this.FindControl<TextBox>("WeightInputBox")!;
-        var weightConv = int.TryParse(WeightStr.Text,out WeightInt);
+        _weightStr = this.FindControl<TextBox>("WeightInputBox")!;
+        var weightConv = int.TryParse(_weightStr.Text,out WeightInt);
         
         ExpressOption = ExpressCheckBox.IsChecked == true ? "Checked" : "Unchecked";
         
@@ -78,6 +80,28 @@ public partial class MainWindow : Window
                 
                 
             }
+
+            Size.Text = $"{HeightInt}x{WidthInt}x{DepthInt} cm";
+            Weight.Text = $"{WeightInt}kg";
+            if (ExpressOption == "Checked")
+            {
+                Express.Text = "Express Jest wybrany";
+            }
+            else
+            {
+                Express.Text = "Express NIE jest wybrany";
+            }
+            ServiceType.Text = $"Rodzaj przesyłki to: {ServiceOption}";
+
+            TotalPrice.Text = $"Końcowa cena wynosi: {finalPrice} zł";
+
+            StackPanel1.IsVisible = false;
+            StackPanel2.IsVisible = false;
+            StackPanel3.IsVisible = false;
+            StackPanel4.IsVisible = false;
+            StackPanel5.IsVisible = true;
+
+
         }
         catch (Exception exception)
         {
@@ -86,12 +110,15 @@ public partial class MainWindow : Window
         }
     }
 
-    private void FormChange(object? sender, TextChangedEventArgs textChangedEventArgs)
+    private void FormChange(object? sender, RoutedEventArgs e)
     {
-        var heightConv = int.TryParse(HeightStr.Text,out HeightInt);
-        var widthConv = int.TryParse(WidthStr.Text,out WidthInt);
-        var depthConv = int.TryParse(DepthStr.Text,out DepthInt);
-        var weightConv = int.TryParse(WeightStr.Text,out WeightInt);
+        CalculatePriceButton.Background = Brushes.Green;
+        var heightConv = int.TryParse(_heightStr.Text,out HeightInt);
+        var widthConv = int.TryParse(_widthStr.Text,out WidthInt);
+        var depthConv = int.TryParse(_depthStr.Text,out DepthInt);
+        var weightConv = int.TryParse(_weightStr.Text,out WeightInt);
+        ExpressOption = ExpressCheckBox.IsChecked == true ? "Checked" : "Unchecked";
+        ServiceOption = (ServiceComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "No selection";
         if (WeightInt > 30 || !weightConv)
         {
             CalculatePriceButton.IsEnabled = false;
@@ -102,6 +129,7 @@ public partial class MainWindow : Window
         else if (!heightConv || !widthConv || !depthConv || !weightConv)
         {
             CalculatePriceButton.IsEnabled = false;
+            
             CalculatePriceButton.Content = "PROSZE WPROWADZIĆ POPRAWNE WARTOŚCI";
         }
         else
