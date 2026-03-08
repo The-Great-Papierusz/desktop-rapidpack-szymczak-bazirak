@@ -19,16 +19,16 @@ public partial class MainWindow : Window
         CalculatePriceButton.Click += CalculatePriceButton_Click;
         
         HeightStr = this.FindControl<TextBox>("HeightInputBox");
-        int HeightInt = int.Parse(HeightStr.Text);
+        var HeightConv = int.TryParse(HeightStr.Text,out int HeightInt);
         
         WidthStr = this.FindControl<TextBox>("WidthInputBox");
-        int WidthInt = int.Parse(WidthStr.Text);
+        var WidthConv = int.TryParse(WidthStr.Text,out int WidthInt);
         
         DepthStr = this.FindControl<TextBox>("DepthInputBox");
-        int DepthInt = int.Parse(DepthStr.Text);
+        var DepthConv = int.TryParse(DepthStr.Text,out int DepthInt);
         
         WeightStr = this.FindControl<TextBox>("WeightInputBox");
-        int WeightInt = int.Parse(WeightStr.Text);
+        var WeightConv = int.TryParse(WeightStr.Text,out int WeightInt);
         
         ExpressOption = ExpressCheckBox.IsChecked == true ? "Checked" : "Unchecked";
         
