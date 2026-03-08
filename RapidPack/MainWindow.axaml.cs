@@ -13,11 +13,15 @@ public partial class MainWindow : Window
     private readonly TextBox _weightStr;
     public string ExpressOption;
     public string ServiceOption;
+    
+    
 
     public int HeightInt;
     public int WidthInt;
     public int DepthInt;
     public int WeightInt;
+    
+    
     public MainWindow()
     {
         InitializeComponent();
@@ -29,7 +33,11 @@ public partial class MainWindow : Window
         ExpressCheckBox.IsCheckedChanged += FormChange;
         ServiceComboBox.SelectionChanged += FormChange;
         
+        
+        
         CalculatePriceButton.Click += CalculatePriceButton_Click;
+        
+        
         
         _heightStr = this.FindControl<TextBox>("HeightInputBox")!;
         var heightConv = int.TryParse(_heightStr.Text,out HeightInt);
@@ -50,8 +58,12 @@ public partial class MainWindow : Window
         
         
     }
+    
+    
+    
+    
 
-    private void CalculatePriceButton_Click(object? sender, RoutedEventArgs e)
+    public void CalculatePriceButton_Click(object? sender, RoutedEventArgs e)
     {
         try
         {
@@ -92,8 +104,10 @@ public partial class MainWindow : Window
                 Express.Text = "Express NIE jest wybrany";
             }
             ServiceType.Text = $"Rodzaj przesyłki to: {ServiceOption}";
+            
 
             TotalPrice.Text = $"Końcowa cena wynosi: {finalPrice} zł";
+            
 
             StackPanel1.IsVisible = false;
             StackPanel2.IsVisible = false;
@@ -109,16 +123,22 @@ public partial class MainWindow : Window
             throw;
         }
     }
+    
+    
 
-    private void FormChange(object? sender, RoutedEventArgs e)
+    public void FormChange(object? sender, RoutedEventArgs e)
     {
         CalculatePriceButton.Background = Brushes.Green;
+        
         var heightConv = int.TryParse(_heightStr.Text,out HeightInt);
         var widthConv = int.TryParse(_widthStr.Text,out WidthInt);
         var depthConv = int.TryParse(_depthStr.Text,out DepthInt);
         var weightConv = int.TryParse(_weightStr.Text,out WeightInt);
         ExpressOption = ExpressCheckBox.IsChecked == true ? "Checked" : "Unchecked";
         ServiceOption = (ServiceComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "No selection";
+        
+        
+        
         if (WeightInt > 30 || !weightConv)
         {
             CalculatePriceButton.IsEnabled = false;
