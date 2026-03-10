@@ -5,29 +5,33 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="RapidPack.MainWindow"
         Title="RapidPack">
-        <StackPanel>
+        <StackPanel Background="LightSteelBlue">
+                <!-- <Image Margin="20" Height="100" Width="40" Source="cloud.png"></Image> -->
                 <StackPanel x:Name="StackPanel1" Margin="10" Spacing="10">
-                        <TextBlock Name="AppTitle" Text="RapidPack" FontSize="20" FontWeight="Bold" />
-                        <TextBlock Name="Authors" Text="Twórcy: Mikołaj B. i Dominika S." Foreground="Gray"/>
+                        <TextBlock Name="AppTitle" Text="RapidPack" FontSize="20" FontWeight="Bold"  Foreground="FloralWhite"/>
+                        <TextBlock Name="Authors" Text="Twórcy: Mikołaj B. i Dominika S." Foreground="FloralWhite"/>
                 </StackPanel>
                 
-                <StackPanel x:Name="StackPanel2" Margin="20" Spacing="10">
-                        <TextBox x:Name="HeightInputBox" Watermark="Podaj wysokość (cm):"/> 
-                        <TextBox x:Name="WidthInputBox" Watermark="Podaj szerokość (cm):"/> 
-                        <TextBox x:Name="DepthInputBox" Watermark="Podaj głębokośc (cm):"/>  
-                        <TextBox x:Name="WeightInputBox" Watermark="Podaj wagę (kg):"/>
+                <StackPanel x:Name="StackPanel2" Margin="8" Spacing="10" Orientation="Horizontal">
+                        <TextBox x:Name="HeightInputBox" Width="180" Watermark="Podaj wysokość (cm):" BorderThickness="3" BorderBrush="AliceBlue"/> 
+                        <TextBox x:Name="WidthInputBox" Width="180" Watermark="Podaj szerokość (cm):" BorderThickness="3" BorderBrush="AliceBlue"/> 
+                </StackPanel>
+                        <StackPanel x:Name="StackPanel2b" Margin="8" Spacing="10" Orientation="Horizontal">
+                        <TextBox x:Name="DepthInputBox" Width="180" Watermark="Podaj głębokośc (cm):" BorderThickness="3" BorderBrush="AliceBlue"/>  
+                        <TextBox x:Name="WeightInputBox" Width="180" Watermark="Podaj wagę (kg):"  BorderThickness="3" BorderBrush="AliceBlue"/>
 
                 </StackPanel>
                 <StackPanel x:Name="StackPanel3" Margin="20" Spacing="10">
-                        <CheckBox x:Name="ExpressCheckBox" Content="Usługa Ekspres (+15zł)" />
-                        <ComboBox x:Name="ServiceComboBox" Margin="0,10,0,0" PlaceholderText="Wybierz typ usługi: ">
+                        <CheckBox x:Name="ExpressCheckBox" Content="Usługa Ekspres (+15zł)" Foreground="AliceBlue"/>
+                        <ComboBox x:Name="ServiceComboBox" Margin="0,10,0,0" PlaceholderText="Wybierz typ usługi: " BorderBrush="AliceBlue" FontWeight="UltraLight">
                                 <ComboBoxItem Content="Standardowa (+0zł)" />
                                 <ComboBoxItem Content="Ostrożnie (+10zł)" />
                                 <ComboBoxItem Content="Paleta" />
                         </ComboBox>
                 </StackPanel>
-                <StackPanel x:Name="StackPanel4" Margin="20" Spacing="10">
-                        <Button x:Name="CalculatePriceButton" Content="WYCEŃ" /> 
+                <StackPanel x:Name="StackPanel4" Margin="20" Spacing="5">
+                        <TextBox IsVisible="False"></TextBox>
+                        <Button x:Name="CalculatePriceButton" Content="WYCEŃ" Background="Gainsboro" /> 
                 </StackPanel>
                 <StackPanel x:Name="StackPanel5" Margin="20" Spacing="10" IsVisible="False">
                         <TextBlock x:Name="FeedbackText" Text="Dziękujemy za Pańską Przesyłkę!"/>
