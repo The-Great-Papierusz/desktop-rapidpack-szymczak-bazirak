@@ -11,15 +11,15 @@ public partial class MainWindow : Window
     private readonly TextBox _widthStr;
     private readonly TextBox _depthStr;
     private readonly TextBox _weightStr;
-    public string ExpressOption;
-    public string ServiceOption;
+    private string _expressOption;
+    private string _serviceOption;
     
     
 
-    public int HeightInt;
-    public int WidthInt;
-    public int DepthInt;
-    public int WeightInt;
+    private int _heightInt;
+    private int _widthInt;
+    private int _depthInt;
+    private int _weightInt;
     
     
     public MainWindow()
@@ -40,20 +40,20 @@ public partial class MainWindow : Window
         
         
         _heightStr = this.FindControl<TextBox>("HeightInputBox")!;
-        var heightConv = int.TryParse(_heightStr.Text,out HeightInt);
+        int.TryParse(_heightStr.Text,out _heightInt);
         
         _widthStr = this.FindControl<TextBox>("WidthInputBox")!;
-        var widthConv = int.TryParse(_widthStr.Text,out WidthInt);
+        int.TryParse(_widthStr.Text,out _widthInt);
         
         _depthStr = this.FindControl<TextBox>("DepthInputBox")!;
-        var depthConv = int.TryParse(_depthStr.Text,out DepthInt);
+        int.TryParse(_depthStr.Text,out _depthInt);
         
         _weightStr = this.FindControl<TextBox>("WeightInputBox")!;
-        var weightConv = int.TryParse(_weightStr.Text,out WeightInt);
+        int.TryParse(_weightStr.Text,out _weightInt);
         
-        ExpressOption = ExpressCheckBox.IsChecked == true ? "Checked" : "Unchecked";
+        _expressOption = ExpressCheckBox.IsChecked == true ? "Checked" : "Unchecked";
         
-        ServiceOption = (ServiceComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "No selection";
+        _serviceOption = (ServiceComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "No selection";
 
         
         
@@ -68,24 +68,24 @@ public partial class MainWindow : Window
         try
         {
             double finalPrice = 10;
-            if (ServiceOption == "Paleta")
+            if (_serviceOption == "Paleta")
             {
                 finalPrice = 100;
             }
             else
             {
-                finalPrice += (2 * WeightInt);
-                if (ServiceOption == "Ostrożnie (+10zł)")
+                finalPrice += (2 * _weightInt);
+                if (_serviceOption == "Ostrożnie (+10zł)")
                 {
                     finalPrice += 10;
                 }
 
-                if (ExpressOption == "Checked")
+                if (_expressOption == "Checked")
                 {
                     finalPrice += 15;
                 }
 
-                if (HeightInt * WidthInt * DepthInt > 150)
+                if (_heightInt * _widthInt * _depthInt > 150)
                 {
                     finalPrice *= 1.5;
                 }
@@ -93,9 +93,9 @@ public partial class MainWindow : Window
                 
             }
 
-            Size.Text = $"{HeightInt}x{WidthInt}x{DepthInt} cm";
-            Weight.Text = $"{WeightInt}kg";
-            if (ExpressOption == "Checked")
+            Size.Text = $"{_heightInt}x{_widthInt}x{_depthInt} cm";
+            Weight.Text = $"{_weightInt}kg";
+            if (_expressOption == "Checked")
             {
                 Express.Text = "Express Jest wybrany";
             }
@@ -103,7 +103,7 @@ public partial class MainWindow : Window
             {
                 Express.Text = "Express NIE jest wybrany";
             }
-            ServiceType.Text = $"Rodzaj przesyłki to: {ServiceOption}";
+            ServiceType.Text = $"Rodzaj przesyłki to: {_serviceOption}";
             
 
             TotalPrice.Text = $"Końcowa cena wynosi: {finalPrice} zł";
@@ -111,9 +111,12 @@ public partial class MainWindow : Window
 
             StackPanel1.IsVisible = false;
             StackPanel2.IsVisible = false;
+            StackPanel2b.IsVisible = false;
             StackPanel3.IsVisible = false;
             StackPanel4.IsVisible = false;
             StackPanel5.IsVisible = true;
+            StackPanel5.Background = Brushes.SeaGreen;
+            StackPanel5.Width = 500;
 
 
         }
@@ -130,35 +133,81 @@ public partial class MainWindow : Window
     {
         CalculatePriceButton.Background = Brushes.Green;
         
-        var heightConv = int.TryParse(_heightStr.Text,out HeightInt);
-        var widthConv = int.TryParse(_widthStr.Text,out WidthInt);
-        var depthConv = int.TryParse(_depthStr.Text,out DepthInt);
-        var weightConv = int.TryParse(_weightStr.Text,out WeightInt);
-        ExpressOption = ExpressCheckBox.IsChecked == true ? "Checked" : "Unchecked";
-        ServiceOption = (ServiceComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "No selection";
+        var heightConv = int.TryParse(_heightStr.Text,out _heightInt);
+        var widthConv = int.TryParse(_widthStr.Text,out _widthInt);
+        var depthConv = int.TryParse(_depthStr.Text,out _depthInt);
+        var weightConv = int.TryParse(_weightStr.Text,out _weightInt);
+        _expressOption = ExpressCheckBox.IsChecked == true ? "Checked" : "Unchecked";
+        _serviceOption = (ServiceComboBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "No selection";
         
-        
-        
-        if (WeightInt > 30 || !weightConv)
+        if (!heightConv)
         {
-            CalculatePriceButton.IsEnabled = false;
-            CalculatePriceButton.Background = Brushes.DarkRed;
-            CalculatePriceButton.Content = "WAGA NIE MOŻE BYĆ WIĘKSZA OD 30KG";
-            
-        }
-        else if (!heightConv || !widthConv || !depthConv || !weightConv)
-        {
-            CalculatePriceButton.IsEnabled = false;
-            
-            CalculatePriceButton.Content = "PROSZE WPROWADZIĆ POPRAWNE WARTOŚCI";
+            HeightInputBox.Background = Brushes.DarkRed;
+            HeightInputBox.BorderBrush = Brushes.BlueViolet;
         }
         else
         {
+            HeightInputBox.Background = Brushes.DarkSlateGray;
+            HeightInputBox.BorderBrush = Brushes.Lavender;
+        }
+        if (!widthConv)
+        {
+            WidthInputBox.Background = Brushes.DarkRed;
+            WidthInputBox.BorderBrush = Brushes.BlueViolet;
+        }
+        else
+        {
+            WidthInputBox.Background = Brushes.DarkSlateGray;
+            WidthInputBox.BorderBrush = Brushes.Lavender;
+        }
+        if (!depthConv)
+        {
+            DepthInputBox.Background = Brushes.DarkRed;
+            DepthInputBox.BorderBrush = Brushes.BlueViolet;
+        }
+        else
+        {
+            DepthInputBox.Background = Brushes.DarkSlateGray;
+            DepthInputBox.BorderBrush = Brushes.Lavender;
+        }
+        if (!weightConv || _weightInt > 30)
+        {
+            WeightInputBox.Background = Brushes.DarkRed;
+            WeightInputBox.BorderBrush = Brushes.BlueViolet;
+        }
+        else
+        {
+            WeightInputBox.Background = Brushes.DarkSlateGray;
+            WeightInputBox.BorderBrush = Brushes.Lavender;
+        }
+        
+        
+        if (!heightConv || !widthConv || !depthConv || !weightConv)
+        {
+            CalculatePriceButton.IsEnabled = false;
+            CheckingBox.IsVisible = true;
+            CheckingBox.Background = Brushes.DarkRed;
+            CheckingBox.Foreground = Brushes.White;
+            CheckingBox.Text = "PROSZE WPROWADZIĆ POPRAWNE WARTOŚCI";
+        }
+        else if (_weightInt > 30)
+        {
+            CalculatePriceButton.IsEnabled = false;
+            CheckingBox.IsVisible = true;
+            CheckingBox.Background = Brushes.DarkRed;
+            CheckingBox.Foreground = Brushes.White;
+            CheckingBox.Text = "WAGA NIE MOŻE BYĆ WIĘKSZA OD 30KG";
+            
+        }
+        else
+        {
+            CheckingBox.IsVisible = false;
             CalculatePriceButton.IsEnabled = true;
             CalculatePriceButton.Background = Brushes.Green;
             CalculatePriceButton.Content = "WYCEŃ";
         }
-
+        
+        
         
         
     }

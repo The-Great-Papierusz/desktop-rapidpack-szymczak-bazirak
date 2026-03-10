@@ -30,7 +30,7 @@
                         </ComboBox>
                 </StackPanel>
                 <StackPanel x:Name="StackPanel4" Margin="20" Spacing="5">
-                        <TextBox IsVisible="False"></TextBox>
+                        <TextBlock x:Name="CheckingBox" IsVisible="False"></TextBlock>
                         <Button x:Name="CalculatePriceButton" Content="WYCEŃ" Background="Gainsboro" /> 
                 </StackPanel>
                 <StackPanel x:Name="StackPanel5" Margin="20" Spacing="10" IsVisible="False">
